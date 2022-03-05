@@ -7,9 +7,13 @@
         <div class="row">
             <div class="column pr-5">
 
-                <?=$render('feed-editor',['user' => $loggedUser]);?>
+                <?= $render('feed-editor', ['user' => $loggedUser]); ?>
 
-                <?=$render('feed-item');?>
+                <?php foreach ($feed as $feedItem) : ?>
+                    <?= $render('feed-item',[
+                        'data' => $feedItem
+                    ]);?>
+                <?php endforeach;?>
 
             </div>
             <div class="column side pl-5">
@@ -21,8 +25,8 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <a href=""><img src="<?=$base?>/media/courses/php-nivel-1.jpg" /></a>
-                        <a href=""><img src="<?=$base?>/media/courses/laravel-nivel-1.jpg" /></a>
+                        <a href=""><img src="<?= $base ?>/media/courses/php-nivel-1.jpg" /></a>
+                        <a href=""><img src="<?= $base ?>/media/courses/laravel-nivel-1.jpg" /></a>
                     </div>
                 </div>
                 <div class="box">
