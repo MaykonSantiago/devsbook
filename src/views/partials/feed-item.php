@@ -11,7 +11,7 @@
                         case 'text':
                             echo 'fez um post';
                             break;
-                        case ' photo':
+                        case 'photo':
                             echo 'postou uma foto';
                             break;
                     }
