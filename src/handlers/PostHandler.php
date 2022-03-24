@@ -4,7 +4,7 @@ namespace src\handlers;
 
 use \src\models\Post;
 use \src\models\User;
-use \src\models\UserRelation;
+use \src\models\User_Relation;
 
 class PostHandler
 {
@@ -90,7 +90,7 @@ class PostHandler
         $perPage = 2;
 
         //Pegar lista de usuários que eu sigo e me adicionando a lista.
-        $userList = UserRelation::select()->where('user_from', $idUser)->get();
+        $userList = User_Relation::select()->where('user_from', $idUser)->get();
         $users = [];
 
         foreach ($userList as $userItem) {

@@ -20,11 +20,7 @@
                         <div class="profile-info-data row">
                             <?php if($user->id != $loggedUser->id) : ?>
                                 <div class="profile-info-item m-width-20">
-                                    <?php if($isFollowing) : ?>
-                                        <a href="" class="button">Deixar de  Seguir</a>
-                                    <?php else: ?>
-                                        <a href="" class="button">Seguir</a>
-                                    <?php endif;?>
+                                    <a href="<?=$base?>/perfil/<?=$user->id;?>/follow" class="button"><?= (!$isFollowing) ? 'Seguir':'Deixar de Seguir' ?></a>
                                 </div>
                             <?php endif;?>
                             <div class="profile-info-item m-width-20">
@@ -78,7 +74,7 @@
                     <div class="box-header m-10">
                         <div class="box-header-text">
                             Seguindo
-                            <span><?=count($user->following);?></span>
+                            <span>(<?=count($user->following);?>)</span>
                         </div>
                         <div class="box-header-buttons">
                             <a href="">ver todos</a>
@@ -89,12 +85,12 @@
                         <?php for($i=0; $i<9; $i++): ?>    
                             <?php if(isset($user->following[$i])): ?>
                                 <div class="friend-icon">
-                                    <a href="<?=$base;?>/perfil/<?=$following[$i]->id;?>">
+                                    <a href="<?=$base;?>/perfil/<?=$user->following[$i]->id;?>">
                                         <div class="friend-icon-avatar">
-                                            <img src="<?=$base;?>/media/avatars/<?=$following[$i]->avatar;?>" />
+                                            <img src="<?=$base;?>/media/avatars/<?=$user->following[$i]->avatar;?>" />
                                         </div>
                                         <div class="friend-icon-name">
-                                            <?=$following[$i]->name;?>
+                                            <?=$user->following[$i]->name;?>
                                         </div>
                                     </a>
                                 </div>
