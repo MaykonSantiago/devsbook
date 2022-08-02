@@ -49,7 +49,7 @@ class UserHandler {
     }
 
     public static function emailExist($email) {
-        $user = User::select()->where('email', $email)->one;
+        $user = User::select()->where('email', $email)->one();
         return $user ? true : false;
     }
 
@@ -65,6 +65,7 @@ class UserHandler {
             $user->work = $data['work'];
             $user->avatar = $data['avatar'];
             $user->cover = $data['cover'];
+            $user->email = $data['email'];
 
             if($full){
                 $user->followers = [];
@@ -117,6 +118,65 @@ class UserHandler {
         ])->execute();
 
         return $token;
+    }
+
+    public static function updateUser($user, $newPassword, $confirmPassword) {
+        
+        if($user->name != ""){ 
+            User::update()
+                ->set('name', $user->name)
+                ->where('id', $user->id)
+            ->execute();
+        }
+        if($user->email != ""){ 
+            if(UserHandler::emailExist($user->email) === false){
+                User::update()
+                    ->set('email', $user->email)
+                    ->where('id', $user->id)
+                ->execute();
+            }else {
+                return 'E-mail já cadastrado!';
+            }
+        }
+
+        if($newPassword && !$confirmPassword){
+            return 'Preencha o campo "Confirmar senha: " para atualizar seus dados!';
+        }
+
+        if(!$newPassword && $confirmPassword){
+            return 'Digite uma nova senha para atualizar seus dados!';
+        }
+
+        if($newPassword && $confirmPassword){
+            if($newPassword == $confirmPassword){
+                User::update()
+                ->set('password', password_hash($newPassword, PASSWORD_DEFAULT))
+                ->where('id', $user->id)
+            ->execute();
+            }else {
+                return 'As senhas não são iguais!';
+            }
+        }
+
+        if($user->birthdate != ""){ 
+            User::update()
+                ->set('birthdate', $user->birthdate)
+                ->where('id', $user->id)
+            ->execute();
+        }
+        if($user->city != ""){ 
+            User::update()
+                ->set('city', $user->city)
+                ->where('id', $user->id)
+            ->execute();
+        }
+        if($user->work != ""){ 
+            User::update()
+                ->set('work', $user->work)
+                ->where('id', $user->id)
+            ->execute();
+        }
+        return 'Dados atualizados com sucesso!';
     }
 
     public static function isFollowing($from, $to){

@@ -430,6 +430,38 @@ header .head-side {
     background-color:#477dbb;
 }
 
+.form-config{
+    font-size: 15px;
+    text-decoration: none;
+    display:block;
+    color:#224b7a;
+    margin-bottom:5px;
+}
+
+.config-new-input {
+    flex:1;
+    height:35px;
+    width: 350px;
+    border-radius:5px;
+    border: 0;
+    outline:0;
+    background-color:rgb(255, 255, 255);
+    font-size:13px;
+    padding:0 15px;
+}
+
+.config-new-input::placeholder{
+    color: rgb(131, 115, 115);
+}
+
+.flash {
+    border: 2px solid red;
+    background-color: red;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
 @media (max-width: 992px) {
     header .head-side-right {
         display:none !important;
