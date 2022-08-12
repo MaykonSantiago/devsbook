@@ -434,7 +434,6 @@ header .head-side {
     font-size: 15px;
     text-decoration: none;
     display:block;
-    color:#224b7a;
     margin-bottom:5px;
 }
 
@@ -454,12 +453,19 @@ header .head-side {
     color: rgb(131, 115, 115);
 }
 
+.column .image-edit{
+    max-width: 300px;
+    margin: 15px;
+    display: block;
+}
+
 .flash {
     border: 2px solid red;
     background-color: red;
     color: white;
     padding: 10px;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 @media (max-width: 992px) {

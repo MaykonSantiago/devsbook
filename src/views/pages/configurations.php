@@ -5,16 +5,23 @@
         <div class="row">
             <div class="column pr-5">
                 <h1>Configurações</h1><br /><br />
-                <label>Novo Avatar</label>
-                <input type="file" name="avatar" /><br />
-                <label>Nova Capa</label>
-                <input type="file" name="cover" /><br />
-                <hr />
-                <form class="form-config" method="POST" action="<?= $base; ?>/configuracoes">
-                    <?php if (!empty($flash) && !strpos($flash, 'senha')) : ?>
+
+                <?php if (!empty($flash) && !strpos($flash, 'senha')) : ?>
                         <div class="flash"><?php echo $flash; ?></div>
                     <?php endif; ?>
 
+                <form  class="form-config" method="POST"  action="<?= $base; ?>/configuracoes" enctype="multipart/form-data">
+                    <label>Novo Avatar:<br/>
+                        <input type="file" name="avatar" /><br />
+                        <img class="image-edit" src="<?=$base; ?>/media/avatars/<?=$user->avatar; ?>" alt="Avatar">
+                    </label><br />
+
+                    <label>Nova Capa:<br />
+                        <input type="file" name="cover" /><br />
+                        <img class="image-edit" src="<?=$base; ?>/media/covers/<?=$user->cover; ?>" alt="Capa">
+                    </label><br />
+                    <hr />
+                    
                     <input placeholder="<?= $user->id ?>" type="hidden" name="id" />
                     <br />
 

@@ -176,6 +176,18 @@ class UserHandler {
                 ->where('id', $user->id)
             ->execute();
         }
+        if($user->avatar){
+            User::update()
+                ->set('avatar', $user->avatar)
+                ->where('id', $user->id)
+            ->execute();
+        }
+        if($user->cover){
+            User::update()
+                ->set('cover', $user->cover)
+                ->where('id', $user->id)
+            ->execute();
+        }
         return 'Dados atualizados com sucesso!';
     }
 
