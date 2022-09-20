@@ -3,6 +3,7 @@
 namespace src\handlers;
 
 use \src\models\Post;
+use \src\models\Post_Like;
 use \src\models\User;
 use \src\models\User_Relation;
 
@@ -45,8 +46,10 @@ class PostHandler
             $newPost->user->avatar = $newUser['avatar'];
 
             //Preenche informações de likes.
-            $newPost->likeCount = 0;
-            $newPost->liked = false;
+            $likes = Post_Like::select()->where('id_post', $postItem['id'])->get();
+           
+            $newPost->likeCount = count($likes);
+            $newPost->liked = self::isLiked($postItem['id'], $loggedUserId);
 
             //Preencher informações dos comentários.
             $newPost->comments = [];
@@ -55,6 +58,36 @@ class PostHandler
         }
 
         return $post;
+    }
+
+    public static function isLiked($id, $loggedUserId) {
+        $myLike = Post_Like::select()
+            ->where('id_post', $id)
+            ->where('id_user', $loggedUserId)
+        ->get();
+
+        if(count($myLike) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function deleteLike($id, $loggedUserId) {
+        var_dump($id.' '.$loggedUserId);
+        Post_Like::delete()
+            ->where('id_post', $id)
+            ->where('id_user', $loggedUserId)
+        ->execute();
+    }
+
+    public static function addLike($id, $loggedUserId) {
+        Post_Like::insert([
+            'id_post' => $id,
+            'id_user' => $loggedUserId,
+            'created_at' => date('Y-m-d H:i:s')
+        ])
+        ->execute();
     }
 
     public static function getUserFeed($idUser, $page, $loggedUserId)

@@ -28,3 +28,5 @@ $router->get('/configuracoes', 'ConfigController@config');
 $router->post('/configuracoes', 'ConfigController@configSave');
 
 $router->get('/sair', 'LoginController@logout');
+
+$router->get('/ajax/like/{id}', 'AjaxController@like');
